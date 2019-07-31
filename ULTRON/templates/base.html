@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- cdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <style>
+      .card {
+        background-color : rgb(175, 210, 233);
+        border-radius : 20px;
+        margin-bottom: 50px;
+        padding: 50px;
+        width : 80%;
+        margin-left:auto;
+        margin-right:auto;
+      }
+    </style>
+    <title>I'm_Iron_man</title>
+</head>
+<body>
+    <!-- navbar -->
+    {% if user.is_authenticated %} 
+    <li class="nav-item dropdown"> 
+    
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">환영합니다. {{ user.username }} 님!</a>
+    
+     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+     <a class="dropdown-item" href="{% url 'new' %}">글쓰기</a>
+     <a class="dropdown-item" href="javascript:{document.getElementById('logout').submit()}">Logout</a>  
+    
+    <form id="logout" method="POST" action="{% url 'logout' %}"> {% csrf_token %} <input type="hidden" /> </form>
+    {% csrf_token %} <input type="hidden" />
+     </form>
+     </div>
+     </li> 
+    {% else %} 
+    <li class="nav-item">
+     <a class="nav-item nav-link" href="{% url 'signup' %}">Signup</a>
+     </li> 
+    <li class="nav-item">
+     <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+     </li> 
+    {% endif %}
+      <!-- navbarEnd -->
+      <div class = "container">
+          {% block content %}
+          {% endblock %}
+      </div>
+     
+</body>
+</html>
+
